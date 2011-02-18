@@ -1,0 +1,66 @@
+\documentclass{article} 
+\usepackage[utf8]{inputenc} 
+\usepackage[english,russian]{babel} 
+\usepackage{pdfsync}
+\usepackage[left=3cm,right=1cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{ncclatex}
+\usepackage{mathtext}
+
+\begin{document} 
+	\section{Модели вычислений. Машины Тьюринга}
+	Классическая машина Тьюринга:\\
+	$\Sigma$ - входной алфавит, $\Gamma \subset \Sigma$ - ленточный алфавит.\\
+	$\delta: Q\times\Gamma \to Q\times\Gamma\times\{L,R,N\}$ - программа.\\
+	$q_1$ - начальное состояние,  $q_a, q_r$ - принимающее и отвергающее состояния.\\
+	
+	Варианты машин:
+	\begin{enumerate}
+		\item $\delta: Q\times\Gamma \to Q\times\Gamma\times\{L,R\}$
+		\item Лента, бесконечная лишь с одной стороны
+		\item Уменьшение алфавита $\Sigma$
+		\item  Многоленточные машины $\delta:Q\times\Gamma^k \to Q\times\Gamma^k\times \{L,R,N\}^k$
+	\end{enumerate} 
+	\underline{Тезис Черча-Тьюринга}\\Любой алгоритм можно реализовать на МТ.\\
+	\underline{Усиленный:}\\Любую вычислительную систему можно смоделировать на МТ с не более чем полиномиальным временем.\\
+	\emph{Конфигурация} - набор $AqaB$, 
+	где $q$ - текущее состояние, $a$ - текущий символ, $A$ - слово слева от $a$, $B$ - слово справа.\\ Кроме $AaB$ на ленте только пробелы \\
+	\emph{Протокол} - последовательность конфигураций в процессе работы.\\
+	\emph{Универсальная МТ}: $U(p,x) = M_p(x)$\\
+	\emph{Язык} $L \subset \{0,1\}^*$\\
+	
+	
+	\underline{Класс P} $ = \cup_{k=1}^{\infty}DTIME(n^k)$,	$L \in DTIME(t(n))$, если $\exists$ МТ $M$:
+	\begin{enumerate}
+		\item Если $x\in L$, то  $M(x)=1$
+		\item Если $x \not\in L$, то $M(x)=0$
+		\item $\forall x \exists c$, если $|x|=n$, то  $M(x)$ работает $\le ct(n)$ шагов.\\
+	\end{enumerate}
+	
+	
+	\underline{Класс NP}: $L\in NP$, если $\exists$ алгоритм $V(..):$
+	\begin{enumerate}
+		\item $x\in L \to \exists s:|s| \le p(|x|), V(x,s)=1$
+		\item $x\not\in L \to \forall s:|s| \le p(|x|), V(x,s)=0$
+		\item $\forall x \forall s |s| \le p(|x|), V$ работает не более чем за $q{|x|}$ шагов.
+	\end{enumerate}
+	\underline{Th.}$P \subset NP$\\
+	\underline{Док-во:}$V(x,s)=M(x)$\\
+	
+	
+	\section{Недетерминированные МТ}
+	Может быть несколько команд с одной и той же Л.И.$\delta:Q\times\Gamma \Rightarrow Q\times\Gamma\times\{L,R,N\}$\\
+	Если несколько вариантов, вычисления разделяются на ветви.\\
+	Если на хотя бы на одной ветви $q_a$ - ответ 1.\\
+	Если везде $q_r$ - ответ 0.\\
+	Если есть бесконечная ветвь - ответа нет.\\
+	
+	\underline{NTIME(t(n))} - класс языков L: $\exists$ НМТ $M$:
+	 \begin{enumerate}
+	 	\item $x \in L \to M(x)=1$
+		\item $X \not\in L \to M(x)=0$
+		\item $\exists c \forall x$ любая ветвь $M(x)$ работает не более чем за $ct(|x|)$ шагов.
+	 \end{enumerate}
+	
+	\underline{Класс NP} $ = \cup_{k=1}^{\infty}NTIME(n^k)$
+
+\end{document}
