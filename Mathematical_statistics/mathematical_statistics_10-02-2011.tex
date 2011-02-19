@@ -1,0 +1,83 @@
+	\section{Введение в математическую статистику}
+	Мат. статистика - теория статистических решений.
+	Основная задача - по экспериментальным данным высказать суждение о природе случайного явления (Оптимальное стат. решение).\\
+	\begin{example}
+		В городе N жителей, среди них M заболевших. В результате осмотра n жителей выявлено m заболевших. Как можно оценить M?
+	\end{example}
+	
+	\subsection{Сходимости случайных величин и векторов}
+	Пусть $\xi,\{\xi_n\}$ - случайные векторы размерности m. Тогда 
+	\begin{enumerate}
+		\item $\xi_n \xrightarrow{a.s.} \xi$ , если $P(\lim_{n\to\infty}\xi_n = \xi) = 1$
+		\item $\xi_n \to^p \xi$, если $\forall \varepsilon > 0 P(|\xi_n - \xi| > 0) \to 0, n \to \infty$
+		\item $\xi_n \to^d \xi$, если $\forall f(x):R^n\to R$ - огр. и непр. выполнено: $Ef(\xi_n) \to Ef(\xi), n \to\infty$
+	\end{enumerate}
+	
+	\begin{theorem}
+		Пусть $\xi, \{\xi_n\}_{n=1}^{\infty}$ - СВ.
+		Тогда $\xi_n \to^d \xi \Leftrightarrow F_{\xi_n} \to^w F_\xi \Leftrightarrow F_{\xi_n} \Rightarrow F_\xi$ 
+	\end{theorem}	
+	
+	\begin{theorem}
+		Пусть $\xi, \{\xi_n\}_{n=1}^{\infty}$ - случайные векторы размерности m. Пусть $F_\xi(x)$ непрерывна. 
+		Тогда $\xi_n \to^d \xi \Leftrightarrow \forall x \in R^m F_{\xi_n} \to F_\xi, n \to \infty$
+	\end{theorem}
+	
+	\begin{theorem}[<О соотношении видов сходимости>]
+		Пусть $\xi, \{\xi_n\}_{n=1}^{\infty}$ - случайные векторы размерности m. Тогда
+		\begin{enumerate}
+			\item $\xi_n \to^{a.s.} \xi \Rightarrow \xi_n \to^p \xi$
+			\item $\xi_n \to^p \xi \Rightarrow \xi_n \to^p \xi$
+		\end{enumerate}
+		\proof\\
+		1). Пусть $\xi_n \to^{a.s.} \xi$ 
+		$$ \Leftrightarrow \forall j=1\ldots m \xi_n^{(j)} \to^{a.s.} \xi^{(j)} \Rightarrow \forall j=1\ldots m \xi_n^{(j)} \to^p \xi^{(j)} \Leftrightarrow \xi_n \to^p \xi$$
+		2). Док-во полностью аналогично 1-мерному случаю (для СВ).
+		\qed
+	\end{theorem}
+	
+	\begin{theorem}[<без доказательства>]
+		Пусть $\xi, \{\xi_n\}_{n=1}^{\infty}$ - случайные векторы размерности m. Если $\xi_n \to^p \xi$, то существует такая $\{\xi_nk\}$, что 
+		$\xi_nk \to^{a.s.} \xi$
+	\end{theorem}
+	
+	\begin{theorem}[<ЗБЧ>]
+		Пусть $\{\xi_n\}_{n=1}^\infty$ - непрер. СВ с условием  $D\xi_n \le C$. Положим $S_n = \xi_1 + \ldots + \xi_n$.
+		Тогда $\frac{S_n - ES_n}{n} \to^p 0$\\
+	\end{theorem} 
+	
+	\begin{theorem}[<УЗБЧ>]\\
+		Пусть $\{\xi_n\}_{n=1}^\infty$ - нез. о.р. СВ с ограниченной дисперсией. Обозначим $S_n$ (аналогично). 
+		Тогда $\frac{S_n - ES_n}{n} \to^{a.s.} 0$\\
+	\end{theorem} 
+	
+	\begin{theorem}[<Центрально-предельная>]\\
+		Пусть $\{\xi_n\}_{n=1}^\infty$ - непрер. СВ с условием  $0 < D\xi_n =\sigma^2 < +\infty$. обозначим $S_n$ аналогично, $E\xi_n = a$.
+		Тогда $\frac{S_n - ES_n}{\sqrt{DS_n}} \to^d N(0,1)$ 	\\
+	\end{theorem} 
+	
+	\begin{theorem}[<о наследовании сх-ти>]\\
+	Пусть $\xi, \{\xi_n\}_{n=1}^\infty$ - случайные векторы размерности m.
+	\begin{enumerate}
+		\item Если $\xi_n \to^{a.s.} \xi$ и $h(x):R^m \to R^l$ такова, что h непрерывна почти всюду относительно распределения $\xi$.
+		Т.е. $\exists B \in B(R^m): h(x)$ непрерывна на $B$ и $P(\xi \in B) = 1$. Тогда $h(\xi_n) \to^{a.s.} h(\xi)$
+		\item Если $\xi_n \to^{p} \xi$ и $h(x):R^m \to R^l$ такова, что h непрерывна почти всюду относительно распределения $\xi$. 
+		Тогда $h(\xi_n) \to^{p} h(\xi)$
+		\item Если $\xi_n \to^{d} \xi$ и $h(x):R^m \to R^l$ - непрерывна. Тогда $h(\xi_n) \to^{d} h(\xi)$
+	\end{enumerate}
+	\proof
+	\begin{enumerate}
+		\item $1 \ge P(\lim_{n\to\infty}h(\xi_n)=h(\xi)) = P(\lim_{n\to\infty}h(\xi_n)=h(\xi), \xi \in B) \ge P(\lim_{n\to\infty}\xi_n=\xi, \xi \in B) = 1$
+		$\Rightarrow P(\lim_{n\to\infty}h(\xi_n)=h(\xi)) = 1$
+		\item Пусть $h(\xi_n) \not\to^p h(\xi)$. Тогда $\exists \varepsilon_0 > 0: \exists$ подпослед. $\xi_nk, \exists \delta_0  > 0:$
+		$P(|h(\xi_nk) - h(\xi)| > \varepsilon_0) \ge \delta_0 \forall k$.
+		Но $\xi_nk \to^p \xi \Rightarrow$ есть еще подпослед. $\xi_{nk_s}: \xi_{nk_s} \to^{a.s.} \xi, s \to \infty$
+		\item Возьмем $f(x):R^m \to R^m$ -огр, непрер. ф-я. $Ef(h(\xi_n))\to^? Ef(h(\xi)) $.
+		Но $f(h(x))$ - непрерывная ограниченная в $R^n$ и $\xi_n\to^d\xi$. Отсюда $Ef(h(\xi_n)) \to Ef(h(\xi)) \Rightarrow h(\xi_n) \to^d h(\xi)$
+	\end{enumerate}
+	\qed
+	\end{theorem}
+	
+	\begin{lemma}[<Слуцкого>]
+		Пусть $\xi_n \to^d \xi, \eta_n \to^d c = const$ - СВ. Тогда: $\xi_n + \eta_n \to^d \xi + c$ ; $\xi_n\eta_n \to^d c\xi $
+	\end{lemma}

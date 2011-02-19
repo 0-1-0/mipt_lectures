@@ -1,0 +1,75 @@
+	\section{Вероятностно-статистическая модель}
+	
+	\begin{definition}
+		Пусть X - некот. наблюдение. Мн-во всех значений X наз. выборочным пространством и обозначается $X$.
+	\end{definition}
+	X - результат случ. выбора элемента $X$ с неизвестгным распределением P.
+	
+	\begin{definition}
+		Тройка $(X, B_x, P), $где $X$ - выборочное пространство, $B_x$ - $\sigma$-алгебра на $X$,
+		$P = \{P: P$ - вер.мера на $(X, B_x)\}$ - семейство распределений  на $(X, B_x)$.
+		
+	\end{definition}
+	
+	Если $P$ параметризовано, т.е. $P = \{P_\theta: \Theta \in O\}$, то модель $(X,B_x,P)$ наз. параметрической.
+	Обычно $(X,B_x)=(R^n,B(R^n))$.
+	
+	\begin{example}
+			Выборка. Пусть прибор работает некоторое случайное время. Все приборы однородны, а потому можно считать, что их времена работы - 
+			это независимые однородно распределенные СВ $\xi_1 \ldots \xi_n \ldots$.
+			Пусть распр. времени работы определяется средним значением: $\Theta = E\xi_i$.
+			Задача - оценить $\Theta ?$
+	\end{example}
+	
+	\begin{example}
+		Линейная регрессия. Объект движется из положения $\Theta_1$ в положение $\Theta_2$ с нек. скоростью.
+		Засекаем его положение в нек. моменты времени. Известны результаты измерений положения объекта в моменты времени 
+		$t_1 \ldots t_n$.
+		$$X_i = \Theta_1 + t_1\Theta_2 + \varepsilon_i$$
+		$\varepsilon_i$ - ошибка измерения.
+		Задача - оценить $\Theta_1, \Theta_2$
+	\end{example}
+	
+	\begin{definition}
+		Набор $X_1 \dots X_n$ - независимых одинаково распределнных СВ с распр. P называется выборкой размера n из распределения P. 
+	\end{definition}
+	
+	\begin{definition}
+		Пусть $X_1 \ldots X_n$ - выборка. Тогда $\forall B \in B(R)$ обозначим $P_n^*(B)=U_n(B)/n$
+		где $U_n(B)$ - число элементов выборки, попавших в $B$, т е 
+		$P_n^* = \frac{\sum_{i=1}^n I\{X_i \in B\}}{n}$
+	\end{definition}
+	
+	\begin{statement}
+		Пусть $X_1 \ldots X_n \ldots$ - выборка неогр. размера из $P_x$.
+		Тогда $\forall B \in B(R): P_n^*\xrightarrow{a.s}P_x(B)$
+		
+		\proof
+		$P_n^*(B) = \frac{1}{n} \sum{i=1}{n}I\{X_i \in B\}$.
+		Согласно УЗБЧ $P_n^* \xrightarrow{a.s} EP^*_n (B) = EI\{X_i \in B\} = P(X_i \in B) = P_x(B)$
+		\qed 
+	\end{statement}
+	
+	\begin{definition}
+		Пусть $X_1 \ldots X_n$ - выборка. Тогда 
+		$F_n(x) = P_n^*(-\infty; x] = \frac{1}{n}\sum{i=1}{n}I\{X_i \le x\}$
+	\end{definition}
+	
+	\begin{theorem}[<Гливенко-Кантелли>]
+		Пусть $X_1 \ldots X_n \ldots$ - выборка неогр. размера.с ф.р. F(x). задана на вер.  пр-ве $(\Omega, F, P)$.
+		Тогда $\sup_{x \in R} |F_n(x) - F(x)| \xrightarrow{a.s} 0$
+		
+		\proof
+		Пусть Q - мн-вол рац. чисел на R. $\forall \omega \in\Omega \longrightarrow |F_n(x,\omega)-F(x)|$ - непрерын. справа, поэтому 
+		$\sup_{x\in R} |F_n(x,\omega)-F(x)| \ge \sup_{x\in Q} |F_n(x,\omega)-F(x)|$
+		
+		Тогда $D_n(x) = \sup_{x\in Q} |F_n(x,\omega) - F(x)|$ - есть sup счетного мн-ва случ. величин $D_n(\omega)$ - тоже СВ.
+		
+		Пусть $N \in N$ Посмотрим $\forall k=1 \ldots N-1 \longrightarrow X_{k,N} = min\{x:F(x) \ge k/n\}$
+		Для удобства положим $x_{0,N} = -\infty, x_{N,N} = +\infty$
+		Пусть $x \in [x_{k,N},x_{k+1,N}]$
+		$F_n(x)-F(x) \le F_n(x_{k+1,N} - 0) - F(x_{k,N}) = (F_n(x_{k+1,N} - 0) - F(x_{k+1,N} - 0)) + (F(x_{k+1,N}-0) - F(x_{k,N}))$
+		Аналогично,$\ldots$
+		$F_n(x)-F(x) \ge F_n(x_{k,N}) - F(x_{k,N}) + F(x_{k,N}) - F(x_{k+1,N} - 0) \ge F_n(x_{k,N}) - F(x_{k,N}) - 1/N$
+		Т.о. $\forall x \in R \longrightarrow |F_n(x) - F(x)| \le \max_{0 \le k \le N-1, 1 \le l \le N}\{F_n(x_{k+1,N} -0) - F(x_{k+1,N} - 0)|, |F_n(x_{k,N})$
+	\end{theorem}

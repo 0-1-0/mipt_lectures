@@ -1,0 +1,104 @@
+	$$P = \cup_{k=1}^\infty DTIME (n^k)$$
+	$$NP = \cup_{k=1}^\infty NTIME(n^k)$$
+	$$EXP=\cup_{k=1}^\infty DTIME(\chi^{n^k})$$
+	
+	\begin{theorem}
+		$NP \subset EXP$
+	\end{theorem}
+	
+	\subsection{Сводимость}
+	
+	\begin{definition}
+		L - полиномиально сводится  (по Карпу) к языку M, если $\exists$ полиномиальная вычислимая функция:
+		$x \in L \Leftrightarrow f(x) \in M, f: \{0,1\}^* \to \{0,1\}^*$
+	\end{definition}
+	
+	\begin{statement}
+		\begin{enumerate}
+			\item $L \le_p M, M \in P \Rightarrow L \in P$
+			\item $L \le_p M, M \le_p \Rightarrow L \le_p N$
+			\item $L \le_p M, M \in NP \Rightarrow L \in NP$
+		\end{enumerate}
+	\end{statement}
+	
+	\begin{definition}
+		Язык М является NP-hard, если $\forall L \in NP \to L \le_p M$
+	\end{definition}
+	
+	\begin{definition}
+		Язык М является NP-complete, если он NP-hard и $M \in NP$
+	\end{definition}
+	
+	\begin{statement}
+		L - NP-hard, $L le_p M \Rightarrow  M -NP-hard$\\
+		L - NP-complete, $L \le_p M, M \in NP \Rightarrow M - NP-complete$
+	\end{statement}
+	
+	\begin{definition}
+		TMSAT = $\{(\alpha,x,1^n,1^k) : \exists u \in \{0,1\}^n : M_{\alpha}(x,u) = 1;  M_{\alpha}(x,u)$ работает k шагов $\}$. 
+	\end{definition}
+	
+	\begin{theorem}
+		TMSAT - NP-полный язык.
+		\proof
+		\begin{enumerate}
+			\item TMSAT $\in NP$\\
+			u - сертификат. Проверка: запустить $M_{\alpha}(x,u)$ на k шагов.
+			
+			\item TMSAT - NP-complete.\\
+			$L \in NP \Rightarrow L \le_p TMSAT$\\
+			$L \in NP \Rightarrow \exists p \exists V \exists q x \in L \Leftrightarrow \exists s \in \{0,1\}^{p(|x|) V(x,s) = 1}$
+			и $V(x,s)$ работает $\le q(|x| + |s|)$ шагов.\\
+			$f(x) = (\lfloor V \rfloor,x,1^{p(|x|)},1^{q(|x| + p(|x|))})$, $\lfloor V \rfloor$ - программа V.
+		\end{enumerate}
+		\qed
+	\end{theorem}
+	
+	\begin{definition}
+		SAT = $\{\varphi | \varphi$ - выполнимая булева формула $\}$.
+	\end{definition}
+	$$SAT \in NP$$
+	
+	\begin{definition}
+		3-SAT = $\{ \varphi | \varphi$ - выполнимая 3-КНФ $\}$, \\
+		3-КНФ: $(q_{11} \vee q_{12} \vee q_{13}) \wedge (q_{21} \vee q_{22} \vee q_{23}) \wedge \ldots \wedge (q_{n1} \vee q_{n2} \vee q_{n3})$,
+		$q_{ij}$ - литерал, т.е. переменная или отрицание переменной.
+	\end{definition}
+	
+	\begin{statement}
+		$SAT \le 3-SAT$
+		\proof
+		\begin{enumerate}
+			\item $SAT \le CNF-SAT$\\
+			$\varphi \to$ КНФ
+			\begin{enumerate}
+				\item Раскрыть импликации $a \to b \sim \neg a \vee b $
+				\item Пронести внутрь отрицания $\neg(a \wedge b) \sim \neg a \vee \neg b$
+				\item Вынести наружу коньюнкции $(a \wedge b) \vee c \sim (a \vee c) \wedge (b \vee c)$
+			\end{enumerate}
+			
+			\item $CNF - SAT \le_p 3-SAT (a \vee b \vee c \vee d \vee e) \sim (a \vee b \vee x) \wedge (\neg x \vee c \vee y) \wedge (\neg y \vee d \vee e)$
+		\end{enumerate}
+	\end{statement}
+	\qed
+	
+	\begin{theorem}{[Кука-Левина]}
+		SAT - NP-complete
+		\proof \\
+		Пусть $L \in NP$. Тогда $\exists p,q,V: x \in L \Leftrightarrow \exists s \in \{0,1\}^{p(|x|)}  V(x,s)=1$ и работает  $\le q(|x| + p(|x|))$ шагов.
+		$ \Leftrightarrow$ Существует протокол конечного размера ($q(|x| + p(|x|)) + 1 \times q(|x| + p(|x|)) + 1)$) определенного вида (*)
+		$\Leftrightarrow$ выполнима формула $\varphi = \varphi(x)$.\\
+		
+		$\Phi = \varphi_{protocol} \& \varphi_{start} \& \varphi_{move} \varphi_{end}$
+		$x_{i,j,a} = 1 \Leftrightarrow$ в клетке (i,j) стоит символ a,\\
+		$0 \le i \le q(|x| + p(|x|)), 0 \le j \le q(|x| + p(|x|)), a \in \Gamma \cup Q$
+		
+		$$\phi_{protocol} = \bigwedge_{i,j} (\sum_a x_{i,j,a} = 1) \wedge \bigwedge_i (\sum_{i,q \in Q}x_{i,j,q} = 1)$$
+		$$\phi_{start}=x_{0,0,q_1} \wedge x_{0,1,a_1} \wedge x_{0,2,a_2} \wedge \ldots \wedge x_{0, |x|, a} \wedge x_{0,|x| + 1, \#}$$
+		$$\wedge \bigwedge_{j=|x| + 2}^{|x| + p(|x|) + 1}(\bigvee_{b \in \Sigma} x_{a,j,b}) \wedge \bigwedge_{j=\ldots}x_{0,j,\#}$$
+		
+		$$\varphi_{end} = \bigvee_{j=0}^N x_{N,j,q_a}$$
+		
+		$$\varphi_{move} = \bigwedge_{i=0}^{N-1}\bigwedge_{j=0}^{N-2}\bigvee_{a_1 \ldots a_6 - допустимое окошко} (x_{i,j,a_1} \wedge x_{i,j+1,a_2} \wedge \ldots \wedge x_{i+1, j+2, a_6})$$
+	\end{theorem}
+	\qed
