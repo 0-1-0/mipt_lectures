@@ -1,0 +1,67 @@
+Пусть $\hat{\theta_n}(x)$ приближающая помследовательность оценок. Как построить хорошую оценку для $\tau(\theta)$? 
+\begin{lemma} утверждение
+    Пусть $\hat{\theta_n}(x)$ - сильносостоятельная оценка для $\theta$. Если $\tau(\theta)$ непрерывная на $\Theta \subset R$, то $\tau(\hat{\theta(x)})$.
+    Состоятельная оценка $\tau(\theta)$. Следует из теоремы о наследовании сходимости. 
+\end{lemma}
+
+\begin{lemma} Лемма о наследовании ассимптотической нормальности.
+
+    Пусть $\hat{\theta_n(x)}$ - ассимптотически нормальная оценка $\theta$ с ассимптотической дисперсией $\sigma^2(\theta)$.
+
+    Пусть $\tau(\hat{\theta(x)})$ - дифференцируема в $\forall \theta \in \Theta \subset R$.
+    Тогда $t(\hat{\theta}(x))$ - с асиимптотической дисперсией $\sigma^2(\theta)(\tau(\theta))$.
+
+    Для $\forall \theta \in \Theta$  выполняется $\sqrt{n}(\hat{\theta}(x) - \theta) \rightarrow(d) Normal(0, \sigma^2(\theta))$.
+    
+    Воспользуемся следствием из леммы Слуцкого
+
+    SKIP
+
+
+    $\xi_n = \sqrt{n}(\hat{\theta}(x)- \theta)$
+    $\xi = normal(0, \sigma^2(\theta)$
+
+    $h(x) = \tau(x)$
+
+    $a = \theta b = \frac{1}{\sqrt{n}}$
+
+     SKIP
+\end{lemma}
+
+\begin{example}
+    Пусть $x_1, \cdots, x_n$ - выборка из $Exp(\theta)$. Найти ассимптотически нормальную оценку для $\theta$.
+    \begin{proof} решение
+
+        Плотность $x_i$ есть $p_{\theta}(x) = \theta e^{-\theta x} I(x > 0)$
+        Тогда $E_{\theta}x_1 = \frac{1}{\theta}, D_{\theta}x_1 = \frac{1}{\theta^2}$
+        Следовательно
+        SKIP
+
+
+        $\tau(\bar{x})$ - ассимптотическая нормальная оценка для $\tau(\frac{1}{\theta})$ с ассимптотической дисперсией 
+        $\frac{1}{\theta ^2} (\tau' (\frac{1}{\theta})) ^ 2 = \theta^2$
+    \end{proof}
+\end{example}
+
+\section{Методы нахождения оценок}
+Примеры подстановок
+Пусть у нас имеется некоторая выборка $x_1, \cdots, x_n$ - выборка из $P \in \{P_{\theta}, \theta \in \Theta\}$
+
+Пусть $P \in \{P_{\theta}, \theta \in \Theta\}$ такова, что для некоторого функционала G выполнено
+
+$\forall \theta \in \Theta: \theta = G(P_{\theta})$
+
+Тогда $\theta*(x_1, \cdots, x_n) = G(P_n^*)$ - называется оценкой параметра $\theta$ по методу подстановки,
+где $P_n^*$ - эмпирическая оценка плотности по выборке $x_1, \cdots, x_n$.
+
+\section{Метод моментов}
+SKIP
+
+Пусть $x_1, \cdots, x_n$ - таковы, что вектор
+
+SKIP
+
+
+\begin{theorem} Состоятельность оценки метода моментов
+    Пусть $\theta^*(x_1, \cdots, x_n)$ - оценка $\theta \in \Theta \subset R^k$ с приближенными SKIP
+\end{theorem}
