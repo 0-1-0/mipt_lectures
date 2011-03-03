@@ -1,0 +1,73 @@
+	\section{NP-полнота}	
+	
+	\begin{definition}
+			$VERTEX-COVER=\{(G,R):$ в графе $G \exists$ вершинное покрытие размером $k\} \in NPC$	
+	\end{definition}
+	$$3-SAT \le_p VERTEX-COVER$$
+	
+	\begin{definition}
+		3-COL = $\{G :$граф $G$  можно раскрасить в 3 цвета $\}$
+	\end{definition}
+	
+	\begin{definition}
+		$SUBSET-SUM = \{(n_1,n_2,\ldots,n_k, N): \exists m \exists i_1, \ldots, i_m ; n_i + \ldots + n_{i_m} = N \}$
+	\end{definition}
+	$3SAT \le_p SUBSET-SUM$
+	
+	\begin{definition}
+		$HAMPATH = \{(G,s,t) :$ в ор. графе $G \exists$ гамильтонов путь из $s$ в $t \}$ 
+	\end{definition}
+	$UHAMPATH = \{(G,s,t) : $ в неор.графе $G \exists$  путь из $s$ в  $t \}$
+	
+	\begin{definition}
+		$CoNP = \{L: \overline L \in NP \}$
+	\end{definition}
+	$P \subset NP \cap coNP$
+	$$\overline L \in NP \exists p \exists q \exists M (x \in \overline L \Leftrightarrow \exists s |s| = p(|x|), M(x,s) = 1)$$
+	$$\exists p \exists q \exists M (x \in L \Leftrightarrow \forall s (|s| = p(|x|) \to M(x,s) = 0))$$
+	
+	\begin{definition}
+		$TAUT = \{\varphi : \varphi$ - тавтология $\} \in CoNP$
+	\end{definition}
+	
+	\begin{definition}
+		$EXP = \bigcup DTIME (2^n)$
+	\end{definition}
+	
+	\begin{definition}
+		$NEXP = \bigcup NTIME(2^n)$
+	\end{definition}
+	
+	\begin{theorem}
+		$EXP \not = NEXP \Rightarrow P \not NP$
+		\proof
+		Пусть $L \in NEXP, L \in NTIME (2^{n^L})$
+		$$L_{pad} = \{x01^{2^{|x|^c}} : x \in L \}$$
+		$L \in NEXP \Rightarrow L_{pad} \in NP$
+		
+		\begin{enumerate}
+			\item Проверить, что вход имеет вид $x01^{2^{|x|^c}}$
+			\item ПРоверить, что $x \in L$. На недет. маш. $O(2^{n^c})$ шагов $\Rightarrow$ лин. время от длины входа.
+			$ P = NP, L_{pad} \in NP \Rightarrow L \subset EXP$ (приписать) $01^{2^{|x|^c}}$ и применить алгоритм для $L_{pad}$)
+		\end{enumerate}
+	\end{theorem}
+	
+	\begin{statement}
+		 Если $P = NP$, то $\forall P \in NP \exists$ полиномиальный алгоритм, находящий сертификат для $x\in L$
+		 \proof
+		\begin{enumerate}
+			\item Док-во для SAT
+			Пусть $\varphi \in SAT, x_1,\ldots,x_k$ - пер-ые.
+			$\varphi_0 = \varphi_0 (x_2\ldots x_k) = \varphi(0,x_2 \ldots x_k)$
+			$\varphi_1 = \varphi(1,x_2,\ldots x_k)$
+			
+			\item Сводимость в теор. Кука-Левина сохран. это св-во.
+		\end{enumerate}
+	\end{statement}
+	
+	Гипотеза $NP = P \cup NPC$
+	\begin{theorem}{<Ладнева>}
+		$P \not = NP \Rightarrow \exists L \in NP/P/NPC$
+		$FACTORING = \{(N,x,y) : $у N есть делитель $\in(x,y)$
+		$GI = \{ (G,H) : G, H$ - изоморфные графы. $\}$
+	\end{theorem}

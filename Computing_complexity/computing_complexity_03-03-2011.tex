@@ -1,0 +1,84 @@
+\documentclass{article} 
+\usepackage[utf8]{inputenc} 
+\usepackage[english,russian]{babel} 
+\usepackage{pdfsync}
+\usepackage[left=3cm,right=1cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{ncclatex}
+\usepackage{mathtext}
+
+\begin{document} 
+
+	\begin{theorem}
+		Сущ. невып. ф-ия.
+		\proof
+		Алс-ов сч. числр $\Rightarrow$ выч. ф-ий счетное числр. Сущ. унив. выч. ф-я $U(p,x)$ -  результат применения программы p ко входу x.
+		Рассмотрим функцию $f(p) = \{1, U(p,p)=0; 0$ иначе $\}$. f - невычислима, т к не совпадает ни с одной строчкой в таблице.
+	\end{theorem}
+	\qed
+	
+	
+	\begin{definition}
+		Функция $f(n)$ конструируемая по времени, если $\exists$ алгоритм, который вычисляет $f(n)$ не более чем за $f(n) + c$ шагов.
+	\end{definition}
+	
+	\begin{theorem}[<Об иерархии>]
+		Пусть $f(n)\log f(n) = o(g(n)), f(n),g(n)$ - конструируемые по времени.  Тогда сущ. язык $L \subset \{0,1\}^*$,
+		который распознается за $O(g(n))$, но не распознается за $O(f(n))$.
+		\proof
+		Пусть, например,$f(n) = n, g(n) = n^{1,5}$
+		$M(p)$: запустить программу p на входе p на $|p|^{1,4}$ шагов. Если на выходе получилось 1, выдать 0. Иначе - 1.
+		M расс-ет язык $\{p|U(p,p)$ выч-ся больше, чем за $|p|^{1,4} or U(p,p) \not = 1\}$
+		$L \in DTIME(n^{1,5}), L \not \in DTIME(n)$.
+		Пусть Т - машина, работающая $c_1 n$ шагов (на k лентах), ее можно смоделировать за $c_2c_1n$ шагов на $2$ лентах.
+		Пусть p - программа для Т такая что $c_2 c_1 |p|\log |p| < |p|^{1,4}$
+		T закончит работу за $|p|^{1,4}$ шагов $\Rightarrow M(p) = 1-T(p)$
+		С другой стороны Т распознает L и M разпознает L $\Rightarrow \forall x M(x) = T(x) \Rightarrow M(p) = T(p) \Rightarrow$ противоречие
+	\end{theorem}
+	\qed
+	
+		\begin{statement}
+			\begin{enumerate}
+				\item $SAT_H \in P \Leftrightarrow H(n) = o(1)$
+				\item $SAT_h \not\in P \Rightarrow H(n)\to\infty$
+			\end{enumerate}
+		\end{statement}
+		\proof \\
+		\underline{1,$\Rightarrow$} $SAT_H \in P \Rightarrow \exists$ машина $M_i$, которая распознает $SAT_H$ за $cn^c$ шагов.
+		$\exists i >c : M=M_i \Rightarrow M_i$ распознает $SAT_H$ за $in^i$ шагов.$\Rightarrow \forall n \ge 2^{2^i} H(n) \le i \Rightarrow H(n) = O(1)$\\
+		\underline{1, $\Leftarrow$} $H(n) = O(1) \Rightarrow \exists i: H(n) = i$ при бесконечно многих n. Тогда $M_i$ распознает $SAT_H$ за $in^i$  шагов.
+		Пусть не так, т е $\exists x: M_i$ не вычисляет  $SAT_H(x)$  за $i|x|^i$ шагов.
+		Тогда при  $n > 2^{|x|} H(n)\not = i$. Противоречие. Значит $SAT_H \in P.$\\
+		\underline{2} $H(n) \not\to\infty \Rightarrow \exists i: H(n) =i$ при бесконечно многих n.
+		\qed
+	
+	\begin{theorem}[<Ландер>]
+		Если $P \not = NP$, то $\exists L \in NP\\P, L $ - не NP-полный
+		\proof
+		$SAT_H = \{\varphi 01^{n^{H(n)}} | \varphi \in SAT, |\varphi| = n \}$
+		\\ $H(n) = min\{min\{i < \log\log n | \forall x |x| < \log n$ машина $M_i$ вычисляет $SAT_H(x)$ за время $in^i\}, \log\log n\}$\\
+		$P \not = NP \Rightarrow SAT_H \not\in P$\\
+		$SAT_H \in P \Rightarrow H(n) = O(1) \Rightarrow H(n) \le c \Rightarrow^* SAT \in P \Rightarrow P=NP.$	\\
+		* алгоритм для $SAT:$
+		\begin{enumerate}
+			\item Вычислить $H(|\varphi|)$
+			\item Возратить $SAT_H(\varphi 01^{n^{H(|\varphi|)}})$
+		\end{enumerate}
+		
+		$P\not = NP \Rightarrow SAT_H \not\in NPC$. \\
+		По доказанному $H(n)\to\infty$
+		Пусть, тем не менее, $SAT_H\in NPC \Rightarrow SAT \le_p SAT_H \Rightarrow \exists$ сводимость $f: \varphi\in SAT \Leftrightarrow f(\varphi)\in SAT_H.$\\
+		$f$  имеет вид $\psi01^{{\psi}^{H(|\psi|)}}$\\
+		$|\psi|^{H(|\psi|)} < 1 + |\psi| + |\psi|^{H(|\psi|)} = |\psi01^{|\psi|^{H(|\psi|)}}| \le |\varphi|^c$.\\
+		$|\psi|^{H(|\psi|}) < |\varphi|^c, H(n)\to\infty$.\\
+		$\exists N \forall n > N H(n) > 3c \Rightarrow |\psi| < |\varphi|^{1/3}.$\\
+		Алгоритм распознавания $SAT:$
+		\begin{enumerate}
+			\item Если $|\varphi| < N$, то взять ответ из таблицы
+			\item Иначе возвратить $SAT(\psi)$, где $\f(\varphi) = \psi01^{|\psi|^{H(|\psi|)}}$
+		\end{enumerate}		
+		Это полиномиальный алгоритм $\Rightarrow P=NP$, противоречие.
+	\end{theorem}
+	\qed
+	
+	
+\end{document}
