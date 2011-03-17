@@ -1,60 +1,40 @@
-\begin{lemma}
-    $$\alpha(G) \le (m+2)C_m^p$$
+\begin{lemma} $\alpha(G) \le (m+2)C_m^p$,
+    $\omega(G) \le (m+2)C_m^p$
 
-    $$\omega(G) \le (m+2)C_m^p$$
-    
-\begin{proof}
-
-    1) Рассмотрим произвольное независимое множество вершин $W = {x_1, \cdots, x_s} : \forall i \ne j <x_i, x_j> \ne 0 (mod p) $ 
-
-    Возьмем произвольный $x \in V \rightarrow F_x \in (FIXME) Z_p [ y_1, \cdots, y_m ]$
-
-    $F_{\bar x}(y_1,\cdots,y_m) = F_x(y) = \prod_{i=1}^{p-1}(i - <x,y>)$
-
-    Свойство;
-
-    $F_x(y) = 0(mofr p) \Leftrightarrow <x,y> \ne 0 (mod p)$
-    
-    $F_x(y) = \sum c y_{i_1} \cdots y_{i_q}$
+    \begin{proof}
+        Рассмотрим произвольное независимое множество вершин 
+        $$W = \{x_1, \cdots, x_s\}: \forall i \ne j <x_i, x_j> \ne 0 (mod p)$$
+        Возьмем произвольный $x \in V$ и построим полином
+        $$F_{\bar{x}} \in \mathbb{Z}_p[y_1, \cdots, y_m]$$
+        $$F_{\bar{x}}(y_1,\cdots,y_m) = F_x(y) = \prod_{i=1}^{p-1}(i - <x,y>)$$
+        Свойство:
+        $$F_{\bar{x}}(\bar{y}) \equiv 0(mod p) \Leftrightarrow 
+        <\bar{x},\bar{y}> \not \equiv 0 (mod p) \forall \bar{x}, \bar{y} \in V$$
+        %$$F_x(y) = \sum c y_{i_1}^{\alpha_{i_1}} \cdots y_{i_q}^{\alpha_{i_q}}$$
+        %$\forall j y_j \in \{0, 1\} \Rightarrow \tilde{F_{\bar{x}}(\bar{y}) = \sum{c \cdots y_{i_1} \cdots y_{i_q}} }$
 
 
-    Рассмторим многочлены $F_{x_1}, \cdots, F_{x_s}$ (с волной). Эти многочлены линейно независимы над $(FIXME) Z_p$
-
-    $c_1F_{x_1} + \cdots + c_sF_{x_s} = 0$
-
-    $\forall y \in V c_1F_{x_1}(y) + \cdots + c_sF_{x_s}(y) = 0$
-
-    Возьмем $y = x_1$. $F_{x_1}(x_1) \ne 0 (mod p)$. $<x_1, x_1> = p^2 = 0 (mod p)$
-
-    $F_{x_i}(x_1) = 0(mod p)$
-
-    $c_i = 0(mod p)$
-
-    Стало быть, многочлены линейно независимы, а значит их количество не больше размерности пространства $<F_{x_1},\ldots,F_{x_s}>$.
-
-    В этом пространстве мономы: $1, y_i, y_iy_j, \cdots, y_{i_1},\cdots y_{i_p}$.
-
-
-    $s \le \sum_{k = 0}^{p - 1} C_m^k < pC_m^p < (m + 2)C_m^p$
- 
-
-    Докажем теперь, что $\omega(G) \le (m + 2)C_m^p$.
-
-    Рассмотрим произвольную $W = {x_1, \cdots, x_s}$ - клику в G: $\forall i \ne j <x_i, x_j> = 0 (mod p)$
-
-    $ < x_i, x_j> \in {0, p, 2p, \ldots, p^2 - p}$, мощностью p.
-
-    $x \in V \rightarrow F_x (FIXME) R[y_1,\cdots,y_m]$
-
-    $F_x(y_ = (<x,y>)(<x,y> - p)(<x,y> - 2p)\cdots(<x,y>-(p^2-p))$.
-    
-\end{proof}
+        Рассмторим многочлены $F_{x_1}, \cdots, F_{x_s}$ (с волной). Эти многочлены линейно независимы над $(FIXME) Z_p$
+        $c_1F_{x_1} + \cdots + c_sF_{x_s} = 0$
+        $\forall y \in V c_1F_{x_1}(y) + \cdots + c_sF_{x_s}(y) = 0$
+        Возьмем $y = x_1$. $F_{x_1}(x_1) \ne 0 (mod p)$. $<x_1, x_1> = p^2 = 0 (mod p)$
+        $F_{x_i}(x_1) = 0(mod p)$
+        $c_i = 0(mod p)$
+        Стало быть, многочлены линейно независимы, а значит их количество не больше размерности пространства $<F_{x_1},\ldots,F_{x_s}>$.
+        В этом пространстве мономы: $1, y_i, y_iy_j, \cdots, y_{i_1},\cdots y_{i_p}$.
+        $s \le \sum_{k = 0}^{p - 1} C_m^k < pC_m^p < (m + 2)C_m^p$
+        Докажем теперь, что $\omega(G) \le (m + 2)C_m^p$.
+        Рассмотрим произвольную $W = {x_1, \cdots, x_s}$ - клику в G: $\forall i \ne j <x_i, x_j> = 0 (mod p)$
+        $ < x_i, x_j> \in {0, p, 2p, \ldots, p^2 - p}$, мощностью p.
+        $x \in V \rightarrow F_x (FIXME) R[y_1,\cdots,y_m]$
+        $F_x(y_ = (<x,y>)(<x,y> - p)(<x,y> - 2p)\cdots(<x,y>-(p^2-p))$.
+    \end{proof}
 \end{lemma}
 
 (тут было много текста...)
 
-$R_k(s, t) = \min{\{n \in N$ при лююбой раскраске полного $k$-однородного гиперграфа на $n$ вершинах в красный и синий цвета. 
-либо найдется $s$-клика, в которой все ребра красны, либо $t$ - синие$\}}$
+$R_k(s, t) = \min\{n \in N$ при лююбой раскраске полного $k$-однородного гиперграфа на $n$ вершинах в красный и синий цвета. 
+либо найдется $s$-клика, в которой все ребра красны, либо $t$ - синие$\}$
 
 \begin{theorem}
     $R_k(s, t) \le R_{k - 1}(R_k(s - 1, t), R_k(s, t - 1)) + 1$
